@@ -1,0 +1,6 @@
+S339AM-RK3399
+M:      Kai <53637670@qq.com>
+S:      Maintained
+F:      board/rockchip/s339am_rk3399
+F:      include/configs/s339am_rk3399.h
+F:      configs/s339am-rk3399_defconfig

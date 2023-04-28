@@ -1,0 +1,2 @@
+arch/arm/mach-rockchip/rk3399/rk3399.c:87:5:arch_cpu_init	0	static
+arch/arm/mach-rockchip/rk3399/rk3399.c:116:6:board_debug_uart_init	0	static
