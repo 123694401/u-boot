@@ -2,12 +2,12 @@
 #include "rk3399-s339am.dtsi"
 
 / {
-	model = "S3399AM";
+	model = "S339AM";
 	compatible = "rockchip,rk3399-mid\0rockchip,rk3399";
 	interrupt-parent = <0x01>;
 	#address-cells = <0x02>;
 	#size-cells = <0x02>;
-
+ 
 	memory {
 		reg = <0x00 0x200000 0x00 0x8200000 0x00 0xa200000 0x00 0xede00000>;
 		device_type = "memory";
@@ -3657,8 +3657,7 @@
 	};
 
 	chosen {
-		stdout-path = "serial2:1500000n8";
-		bootargs = "earlycon=uart8250,mmio32,0xff1a0000 swiotlb=1 coherent_pool=1m console=ttyFIQ0 rw rootfstype=ext4 rootwait ";
+		bootargs = "earlycon=uart8250,mmio32,0xff1a0000 swiotlb=1 coherent_pool=1m console=ttyFIQ0 rw rootwait";
 	};
 
 	cpuinfo {
@@ -3809,7 +3808,7 @@
 	uboot-charge {
 		compatible = "rockchip,uboot-charge";
 		rockchip,uboot-charge-on = <0x01>;
-		rockchip,android-charge-on = <0x00>;
+		//rockchip,android-charge-on = <0x00>;
 	};
 
 	hdmi-dp-sound {
@@ -3818,7 +3817,34 @@
 		rockchip,cpu = <0xcb>;
 		rockchip,codec = <0xcc 0xcd>;
 	};
+	/*
+	firmware {
 
+		android {
+			compatible = "android,firmware";
+
+			fstab {
+				compatible = "android,fstab";
+
+				system {
+					compatible = "android,system";
+					dev = "/dev/block/platform/fe330000.sdhci/by-name/system";
+					type = "ext4";
+					mnt_flags = "ro,barrier=1,inode_readahead_blks=8";
+					fsmgr_flags = "wait,verify";
+				};
+
+				vendor {
+					compatible = "android,vendor";
+					dev = "/dev/block/platform/fe330000.sdhci/by-name/vendor";
+					type = "ext4";
+					mnt_flags = "ro,barrier=1,inode_readahead_blks=8";
+					fsmgr_flags = "wait,verify";
+				};
+			};
+		};
+	};
+	*/
 	energy-costs {
 
 		rk3399-core-cost0 {
@@ -4058,20 +4084,20 @@
 
 		opp-200000000 {
 			opp-hz = <0x00 0xbebc200>;
-			opp-microvolt = <0xc3500>;
-			opp-microvolt-L0 = <0xc3500>;
-			opp-microvolt-L1 = <0xc3500>;
-			opp-microvolt-L2 = <0xc3500>;
-			opp-microvolt-L3 = <0xc3500>;
+			opp-microvolt = "\0\f5";
+			opp-microvolt-L0 = "\0\f5";
+			opp-microvolt-L1 = "\0\f5";
+			opp-microvolt-L2 = "\0\f5";
+			opp-microvolt-L3 = "\0\f5";
 		};
 
 		opp-300000000 {
 			opp-hz = <0x00 0x11e1a300>;
-			opp-microvolt = <0xc3500>;
-			opp-microvolt-L0 = <0xc3500>;
-			opp-microvolt-L1 = <0xc3500>;
-			opp-microvolt-L2 = <0xc3500>;
-			opp-microvolt-L3 = <0xc3500>;
+			opp-microvolt = "\0\f5";
+			opp-microvolt-L0 = "\0\f5";
+			opp-microvolt-L1 = "\0\f5";
+			opp-microvolt-L2 = "\0\f5";
+			opp-microvolt-L3 = "\0\f5";
 		};
 
 		opp-400000000 {
@@ -4079,8 +4105,8 @@
 			opp-microvolt = <0xc96a8>;
 			opp-microvolt-L0 = <0xc96a8>;
 			opp-microvolt-L1 = <0xc96a8>;
-			opp-microvolt-L2 = <0xc3500>;
-			opp-microvolt-L3 = <0xc3500>;
+			opp-microvolt-L2 = "\0\f5";
+			opp-microvolt-L3 = "\0\f5";
 		};
 
 		opp-600000000 {

@@ -19,6 +19,7 @@
 #include <asm/arch-rockchip/hardware.h>
 #include <linux/bitops.h>
 
+
 #ifndef CONFIG_SPL_BUILD
 int board_early_init_f(void)
 {
@@ -34,30 +35,8 @@ int board_early_init_f(void)
 	ret = regulator_set_enable(regulator, true);
 	if (ret)
 		debug("%s vcc5v0-host-en set fail! ret %d\n", __func__, ret);
+
 out:
 	return 0;
 }
-
-#else
-
-#define PMUGRF_BASE	0xff320000
-#define GPIO0_BASE	0xff720000
-
-
-#endif
-
-#ifdef CONFIG_MISC_INIT_R
-int misc_init_r(void)
-{
-	struct rk3399_grf_regs *grf =
-	    syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
-
-	/**
-	 * Some SSD's to work on rock960 would require explicit
-	 * domain voltage change, so BT565 is in 1.8v domain
-	 */
-	rk_setreg(&grf->io_vsel, BIT(0));
-
-	return 0;
-}
-#endif
+#endif /* !CONFIG_SPL_BUILD */
