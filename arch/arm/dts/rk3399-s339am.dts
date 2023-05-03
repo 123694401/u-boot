@@ -2,12 +2,12 @@
 #include "rk3399-s339am.dtsi"
 
 / {
-	model = "S339AM";
+	model = "rockchip rk3399 S339AM";
 	compatible = "rockchip,rk3399-mid\0rockchip,rk3399";
 	interrupt-parent = <0x01>;
 	#address-cells = <0x02>;
 	#size-cells = <0x02>;
- 
+
 	memory {
 		reg = <0x00 0x200000 0x00 0x8200000 0x00 0xa200000 0x00 0xede00000>;
 		device_type = "memory";
@@ -3657,6 +3657,8 @@
 	};
 
 	chosen {
+		//linux,initrd-end = <0x00 0x4e2696c>;
+		//linux,initrd-start = <0x00 0x4bf0000>;
 		bootargs = "earlycon=uart8250,mmio32,0xff1a0000 swiotlb=1 coherent_pool=1m console=ttyFIQ0 rw rootwait";
 	};
 
@@ -3843,8 +3845,8 @@
 				};
 			};
 		};
-	};
-	*/
+	};*/
+
 	energy-costs {
 
 		rk3399-core-cost0 {
