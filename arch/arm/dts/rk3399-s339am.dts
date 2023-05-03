@@ -3659,7 +3659,7 @@
 	chosen {
 		//linux,initrd-end = <0x00 0x4e2696c>;
 		//linux,initrd-start = <0x00 0x4bf0000>;
-		bootargs = "earlycon=uart8250,mmio32,0xff1a0000 swiotlb=1 coherent_pool=1m console=ttyFIQ0 rw rootwait";
+		bootargs = "earlycon=uart8250,mmio32,0xff1a0000 swiotlb=1 coherent_pool=1m console=ttyFIQ0,115200 rw rootwait earlyprintk";
 	};
 
 	cpuinfo {
