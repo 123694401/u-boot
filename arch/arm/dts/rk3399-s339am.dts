@@ -3655,12 +3655,12 @@
 		rockchip,pwm-regulator-config = <0x04>;
 		rockchip,power-ctrl = <0x34 0x11 0x00 0x34 0x0e 0x00>;
 	};
-
+	/*
 	chosen {
 		//linux,initrd-end = <0x00 0x4e2696c>;
 		//linux,initrd-start = <0x00 0x4bf0000>;
-		bootargs = "earlycon=uart8250,mmio32,0xff1a0000 swiotlb=1 coherent_pool=1m console=ttyFIQ0,115200 rw rootwait earlyprintk";
-	};
+		bootargs = "earlycon=uart8250,mmio32,0xff1a0000 swiotlb=1 coherent_pool=1m console=ttyFIQ0,115200n8 rw rootfstype=ext4 rootwait earlyprintk";
+	};*/
 
 	cpuinfo {
 		compatible = "rockchip,cpuinfo";
