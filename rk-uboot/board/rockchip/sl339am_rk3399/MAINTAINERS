@@ -4,4 +4,3 @@ S:      Maintained
 F:      board/rockchip/sl339am_rk3399
 F:      include/configs/sl339am_rk3399.h
 F:      configs/sl339am-rk3399_defconfig
-F:      configs/firefly-rk3399_defconfig
