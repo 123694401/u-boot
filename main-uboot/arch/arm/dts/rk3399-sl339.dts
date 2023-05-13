@@ -103,7 +103,7 @@
 
 		cpu@0 {
 			device_type = "cpu";
-			compatible = "arm,cortex-a53\0arm,armv8";
+			compatible = "arm,cortex-a53", "arm,armv8";
 			reg = <0x00 0x00>;
 			enable-method = "psci";
 			#cooling-cells = <0x02>;
@@ -118,7 +118,7 @@
 
 		cpu@1 {
 			device_type = "cpu";
-			compatible = "arm,cortex-a53\0arm,armv8";
+			compatible = "arm,cortex-a53", "arm,armv8";
 			reg = <0x00 0x01>;
 			enable-method = "psci";
 			clocks = <0x08 0x08>;
@@ -132,7 +132,7 @@
 
 		cpu@2 {
 			device_type = "cpu";
-			compatible = "arm,cortex-a53\0arm,armv8";
+			compatible = "arm,cortex-a53", "arm,armv8";
 			reg = <0x00 0x02>;
 			enable-method = "psci";
 			clocks = <0x08 0x08>;
@@ -146,7 +146,7 @@
 
 		cpu@3 {
 			device_type = "cpu";
-			compatible = "arm,cortex-a53\0arm,armv8";
+			compatible = "arm,cortex-a53", "arm,armv8";
 			reg = <0x00 0x03>;
 			enable-method = "psci";
 			clocks = <0x08 0x08>;
@@ -160,7 +160,7 @@
 
 		cpu@100 {
 			device_type = "cpu";
-			compatible = "arm,cortex-a72\0arm,armv8";
+			compatible = "arm,cortex-a72", "arm,armv8";
 			reg = <0x00 0x100>;
 			enable-method = "psci";
 			#cooling-cells = <0x02>;
@@ -175,7 +175,7 @@
 
 		cpu@101 {
 			device_type = "cpu";
-			compatible = "arm,cortex-a72\0arm,armv8";
+			compatible = "arm,cortex-a72", "arm,armv8";
 			reg = <0x00 0x101>;
 			enable-method = "psci";
 			clocks = <0x08 0x09>;
@@ -260,7 +260,7 @@
 		ranges;
 
 		dma-controller@ff6d0000 {
-			compatible = "arm,pl330\0arm,primecell";
+			compatible = "arm,pl330", "arm,primecell";
 			reg = <0x00 0xff6d0000 0x00 0x4000>;
 			interrupts = <0x00 0x05 0x04 0x00 0x00 0x06 0x04 0x00>;
 			#dma-cells = <0x01>;
@@ -271,7 +271,7 @@
 		};
 
 		dma-controller@ff6e0000 {
-			compatible = "arm,pl330\0arm,primecell";
+			compatible = "arm,pl330", "arm,primecell";
 			reg = <0x00 0xff6e0000 0x00 0x4000>;
 			interrupts = <0x00 0x07 0x04 0x00 0x00 0x08 0x04 0x00>;
 			#dma-cells = <0x01>;
@@ -333,7 +333,7 @@
 	};
 
 	dwmmc@fe320000 {
-		compatible = "rockchip,rk3399-dw-mshc\0rockchip,rk3288-dw-mshc";
+		compatible = "rockchip,rk3399-dw-mshc", "rockchip,rk3288-dw-mshc";
 		reg = <0x00 0xfe320000 0x00 0x4000>;
 		interrupts = <0x00 0x41 0x04 0x00>;
 		clock-freq-min-max = <0x61a80 0x8f0d180>;
@@ -355,7 +355,7 @@
 	};
 
 	sdhci@fe330000 {
-		compatible = "rockchip,rk3399-sdhci-5.1\0arasan,sdhci-5.1";
+		compatible = "rockchip,rk3399-sdhci-5.1", "arasan,sdhci-5.1";
 		reg = <0x00 0xfe330000 0x00 0x10000>;
 		interrupts = <0x00 0x0b 0x04 0x00>;
 		arasan,soc-ctl-syscon = <0x15>;
@@ -661,7 +661,7 @@
 			rockchip,system-power-controller;
 			wakeup-source;
 			#clock-cells = <0x01>;
-			clock-output-names = "xin32k\0rk808-clkout2";
+			clock-output-names = "xin32k","rk808-clkout2";
 			vcc1-supply = <0x32>;
 			vcc2-supply = <0x32>;
 			vcc3-supply = <0x32>;
@@ -978,7 +978,7 @@
 	};
 
 	serial@ff180000 {
-		compatible = "rockchip,rk3399-uart\0snps,dw-apb-uart";
+		compatible = "rockchip,rk3399-uart", "snps,dw-apb-uart";
 		reg = <0x00 0xff180000 0x00 0x100>;
 		clocks = <0x08 0x51 0x08 0x160>;
 		clock-names = "baudclk\0apb_pclk";
@@ -993,7 +993,7 @@
 	};
 
 	serial@ff190000 {
-		compatible = "rockchip,rk3399-uart\0snps,dw-apb-uart";
+		compatible = "rockchip,rk3399-uart", "snps,dw-apb-uart";
 		reg = <0x00 0xff190000 0x00 0x100>;
 		clocks = <0x08 0x52 0x08 0x161>;
 		clock-names = "baudclk\0apb_pclk";
@@ -1008,7 +1008,7 @@
 	};
 
 	serial@ff1a0000 {
-		compatible = "rockchip,rk3399-uart\0snps,dw-apb-uart";
+		compatible = "rockchip,rk3399-uart", "snps,dw-apb-uart";
 		reg = <0x00 0xff1a0000 0x00 0x100>;
 		clocks = <0x08 0x53 0x08 0x162>;
 		clock-names = "baudclk\0apb_pclk";
@@ -1023,7 +1023,7 @@
 	};
 
 	serial@ff1b0000 {
-		compatible = "rockchip,rk3399-uart\0snps,dw-apb-uart";
+		compatible = "rockchip,rk3399-uart", "snps,dw-apb-uart";
 		reg = <0x00 0xff1b0000 0x00 0x100>;
 		clocks = <0x08 0x54 0x08 0x163>;
 		clock-names = "baudclk\0apb_pclk";
@@ -1038,7 +1038,7 @@
 	};
 
 	spi@ff1c0000 {
-		compatible = "rockchip,rk3399-spi\0rockchip,rk3066-spi";
+		compatible = "rockchip,rk3399-spi", "rockchip,rk3066-spi";
 		reg = <0x00 0xff1c0000 0x00 0x1000>;
 		clocks = <0x08 0x47 0x08 0x15b>;
 		clock-names = "spiclk\0apb_pclk";
@@ -1051,7 +1051,7 @@
 	};
 
 	spi@ff1d0000 {
-		compatible = "rockchip,rk3399-spi\0rockchip,rk3066-spi";
+		compatible = "rockchip,rk3399-spi", "rockchip,rk3066-spi";
 		reg = <0x00 0xff1d0000 0x00 0x1000>;
 		clocks = <0x08 0x48 0x08 0x15c>;
 		clock-names = "spiclk\0apb_pclk";
@@ -1074,7 +1074,7 @@
 	};
 
 	spi@ff1e0000 {
-		compatible = "rockchip,rk3399-spi\0rockchip,rk3066-spi";
+		compatible = "rockchip,rk3399-spi", "rockchip,rk3066-spi";
 		reg = <0x00 0xff1e0000 0x00 0x1000>;
 		clocks = <0x08 0x49 0x08 0x15d>;
 		clock-names = "spiclk\0apb_pclk";
@@ -1087,7 +1087,7 @@
 	};
 
 	spi@ff1f0000 {
-		compatible = "rockchip,rk3399-spi\0rockchip,rk3066-spi";
+		compatible = "rockchip,rk3399-spi", "rockchip,rk3066-spi";
 		reg = <0x00 0xff1f0000 0x00 0x1000>;
 		clocks = <0x08 0x4a 0x08 0x15e>;
 		clock-names = "spiclk\0apb_pclk";
@@ -1100,7 +1100,7 @@
 	};
 
 	spi@ff200000 {
-		compatible = "rockchip,rk3399-spi\0rockchip,rk3066-spi";
+		compatible = "rockchip,rk3399-spi", "rockchip,rk3066-spi";
 		reg = <0x00 0xff200000 0x00 0x1000>;
 		clocks = <0x08 0x4b 0x08 0x15f>;
 		clock-names = "spiclk\0apb_pclk";
@@ -1345,7 +1345,7 @@
 	};
 
 	power-management@ff310000 {
-		compatible = "rockchip,rk3399-pmu\0syscon\0simple-mfd";
+		compatible = "rockchip,rk3399-pmu", "syscon", "simple-mfd";
 		reg = <0x00 0xff310000 0x00 0x1000>;
 
 		power-controller {
@@ -1483,7 +1483,7 @@
 	};
 
 	syscon@ff320000 {
-		compatible = "rockchip,rk3399-pmugrf\0syscon\0simple-mfd";
+		compatible = "rockchip,rk3399-pmugrf", "syscon", "simple-mfd";
 		reg = <0x00 0xff320000 0x00 0x1000>;
 		#address-cells = <0x01>;
 		#size-cells = <0x01>;
@@ -1518,7 +1518,7 @@
 	};
 
 	spi@ff350000 {
-		compatible = "rockchip,rk3399-spi\0rockchip,rk3066-spi";
+		compatible = "rockchip,rk3399-spi", "rockchip,rk3066-spi";
 		reg = <0x00 0xff350000 0x00 0x1000>;
 		clocks = <0x30 0x03 0x30 0x1f>;
 		clock-names = "spiclk\0apb_pclk";
@@ -1531,7 +1531,7 @@
 	};
 
 	serial@ff370000 {
-		compatible = "rockchip,rk3399-uart\0snps,dw-apb-uart";
+		compatible = "rockchip,rk3399-uart", "snps,dw-apb-uart";
 		reg = <0x00 0xff370000 0x00 0x100>;
 		clocks = <0x30 0x06 0x30 0x22>;
 		clock-names = "baudclk\0apb_pclk";
@@ -1644,7 +1644,7 @@
 	};
 
 	pwm@ff420000 {
-		compatible = "rockchip,rk3399-pwm\0rockchip,rk3288-pwm";
+		compatible = "rockchip,rk3399-pwm", "rockchip,rk3288-pwm";
 		reg = <0x00 0xff420000 0x00 0x10>;
 		#pwm-cells = <0x03>;
 		pinctrl-names = "active";
@@ -1656,7 +1656,7 @@
 	};
 
 	pwm@ff420010 {
-		compatible = "rockchip,rk3399-pwm\0rockchip,rk3288-pwm";
+		compatible = "rockchip,rk3399-pwm", "rockchip,rk3288-pwm";
 		reg = <0x00 0xff420010 0x00 0x10>;
 		#pwm-cells = <0x03>;
 		pinctrl-names = "active";
@@ -1668,7 +1668,7 @@
 	};
 
 	pwm@ff420020 {
-		compatible = "rockchip,rk3399-pwm\0rockchip,rk3288-pwm";
+		compatible = "rockchip,rk3399-pwm", "rockchip,rk3288-pwm";
 		reg = <0x00 0xff420020 0x00 0x10>;
 		#pwm-cells = <0x03>;
 		pinctrl-names = "active";
@@ -1910,7 +1910,7 @@
 	};
 
 	syscon@ff770000 {
-		compatible = "rockchip,rk3399-grf\0syscon\0simple-mfd";
+		compatible = "rockchip,rk3399-grf", "syscon", "simple-mfd";
 		reg = <0x00 0xff770000 0x00 0x10000>;
 		#address-cells = <0x01>;
 		#size-cells = <0x01>;
@@ -2103,7 +2103,7 @@
 	};
 
 	i2s@ff880000 {
-		compatible = "rockchip,rk3399-i2s\0rockchip,rk3066-i2s";
+		compatible = "rockchip,rk3399-i2s", "rockchip,rk3066-i2s";
 		reg = <0x00 0xff880000 0x00 0x1000>;
 		rockchip,grf = <0x15>;
 		interrupts = <0x00 0x27 0x04 0x00>;
@@ -2125,7 +2125,7 @@
 	};
 
 	i2s@ff890000 {
-		compatible = "rockchip,rk3399-i2s\0rockchip,rk3066-i2s";
+		compatible = "rockchip,rk3399-i2s", "rockchip,rk3066-i2s";
 		reg = <0x00 0xff890000 0x00 0x1000>;
 		interrupts = <0x00 0x28 0x04 0x00>;
 		dmas = <0x97 0x02 0x97 0x03>;
@@ -2143,7 +2143,7 @@
 	};
 
 	i2s@ff8a0000 {
-		compatible = "rockchip,rk3399-i2s\0rockchip,rk3066-i2s";
+		compatible = "rockchip,rk3399-i2s", "rockchip,rk3066-i2s";
 		reg = <0x00 0xff8a0000 0x00 0x1000>;
 		interrupts = <0x00 0x29 0x04 0x00>;
 		dmas = <0x97 0x04 0x97 0x05>;
@@ -2160,7 +2160,7 @@
 	};
 
 	gpu@ff9a0000 {
-		compatible = "arm,malit860\0arm,malit86x\0arm,malit8xx\0arm,mali-midgard";
+		compatible = "arm,malit860", "arm,malit86x", "arm,malit8xx", "arm,mali-midgard";
 		reg = <0x00 0xff9a0000 0x00 0x10000>;
 		interrupts = <0x00 0x13 0x04 0x00 0x00 0x14 0x04 0x00 0x00 0x15 0x04 0x00>;
 		interrupt-names = "GPU\0JOB\0MMU";
@@ -3758,7 +3758,7 @@
 	};
 
 	isp@ff910000 {
-		compatible = "rockchip,rk3399-isp\0rockchip,isp";
+		compatible = "rockchip,rk3399-isp", "rockchip,isp";
 		reg = <0x00 0xff910000 0x00 0x4000>;
 		interrupts = <0x00 0x2b 0x04 0x00>;
 		clocks = <0x08 0x89 0x08 0x89 0x08 0xa4 0x08 0x77 0x08 0xe7 0x08 0xe9 0x08 0x1e1 0x08 0x1e3 0x08 0x6e 0x08 0xa5>;
@@ -3781,7 +3781,7 @@
 	};
 
 	isp@ff920000 {
-		compatible = "rockchip,rk3399-isp\0rockchip,isp";
+		compatible = "rockchip,rk3399-isp", "rockchip,isp";
 		reg = <0x00 0xff920000 0x00 0x4000>;
 		interrupts = <0x00 0x2c 0x04 0x00>;
 		clocks = <0x08 0xe8 0x08 0xea 0x08 0x1e2 0x08 0x1e4 0x08 0x6f 0x08 0x89 0x08 0x89 0x08 0xa4 0x08 0x77 0x08 0x17b 0x08 0xa5 0x08 0x171 0x08 0x78>;
