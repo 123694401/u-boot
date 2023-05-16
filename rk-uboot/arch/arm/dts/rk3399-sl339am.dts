@@ -2,6 +2,7 @@
 
 /memreserve/	0x0000000004600000 0x0000000000015000;
 /memreserve/	0x0000000004bf0000 0x000000000023696c;
+
 / {
 	compatible = "rockchip,rk3399-mid", "rockchip,rk3399";
 	interrupt-parent = <0x01>;
@@ -283,7 +284,7 @@
 		};
 	};
 
-	ethernet@fe300000 {
+	gmac: ethernet@fe300000 {
 		compatible = "rockchip,rk3399-gmac";
 		reg = <0x00 0xfe300000 0x00 0x10000>;
 		rockchip,grf = <0x15>;
@@ -293,7 +294,8 @@
 		clock-names = "stmmaceth", "mac_clk_rx", "mac_clk_tx", "clk_mac_ref", "clk_mac_refout", "aclk_mac", "pclk_mac";
 		resets = <0x08 0x89>;
 		reset-names = "stmmaceth";
-		power-domains = <0x16 0x16>;
+		/*power-domains = <0x16 0x16>;*/
+		power-domains = <&power &RK3399_PD_GMAC>;
 		status = "okay";
 		phy-supply = <0x17>;
 		phy-mode = "rgmii";
@@ -309,7 +311,7 @@
 		rx_delay = <0x11>;
 	};
 
-	dwmmc@fe310000 {
+	sdio0: dwmmc@fe310000 {
 		compatible = "rockchip,rk3399-dw-mshc", "rockchip,rk3288-dw-mshc";
 		reg = <0x00 0xfe310000 0x00 0x4000>;
 		interrupts = <0x00 0x40 0x04 0x00>;
@@ -317,7 +319,8 @@
 		clocks = <0x08 0x1ee 0x08 0x4d 0x08 0x9c 0x08 0x9d>;
 		clock-names = "biu", "ciu", "ciu-drive", "ciu-sample";
 		fifo-depth = <0x100>;
-		power-domains = <0x16 0x1c>;
+		/*power-domains = <0x16 0x1c>;*/
+		power-domains = <&power &RK3399_PD_SDIOAUDIO>;
 		status = "okay";
 		clock-frequency = <0x8f0d180>;
 		supports-sdio;
@@ -334,7 +337,7 @@
 		sd-uhs-sdr104;
 	};
 
-	dwmmc@fe320000 {
+	sdmmc: dwmmc@fe320000 {
 		compatible = "rockchip,rk3399-dw-mshc", "rockchip,rk3288-dw-mshc";
 		reg = <0x00 0xfe320000 0x00 0x4000>;
 		interrupts = <0x00 0x41 0x04 0x00>;
@@ -342,7 +345,8 @@
 		clocks = <0x08 0x1ce 0x08 0x4c 0x08 0x9a 0x08 0x9b>;
 		clock-names = "biu", "ciu", "ciu-drive", "ciu-sample";
 		fifo-depth = <0x100>;
-		power-domains = <0x16 0x1b>;
+		/*power-domains = <0x16 0x1b>;*/
+		power-domains = <&power &RK3399_PD_SD>;
 		status = "okay";
 		clock-frequency = <0x2faf080>;
 		supports-sd;
@@ -356,7 +360,7 @@
 		pinctrl-0 = <0x20 0x21 0x22 0x23>;
 	};
 
-	sdhci@fe330000 {
+	sdhci: sdhci@fe330000 {
 		compatible = "rockchip,rk3399-sdhci-5.1", "arasan,sdhci-5.1";
 		reg = <0x00 0xfe330000 0x00 0x10000>;
 		interrupts = <0x00 0x0b 0x04 0x00>;
@@ -369,7 +373,8 @@
 		#clock-cells = <0x00>;
 		phys = <0x24>;
 		phy-names = "phy_arasan";
-		power-domains = <0x16 0x17>;
+		/*power-domains = <0x16 0x17>;*/
+		power-domains = <&power RK3399_PD_EMMC>;
 		status = "okay";
 		assigned-clock-parents = <0x08 0x05>;
 		bus-width = <0x08>;
@@ -391,7 +396,7 @@
 		status = "disabled";
 	};
 
-	usb@fe380000 {
+	usb_host0_ehci: usb@fe380000 {
 		compatible = "generic-ehci";
 		reg = <0x00 0xfe380000 0x00 0x20000>;
 		interrupts = <0x00 0x1a 0x04 0x00>;
@@ -399,11 +404,12 @@
 		clock-names = "hclk_host0", "hclk_host0_arb", "usbphy0_480m";
 		phys = <0x25>;
 		phy-names = "usb";
-		power-domains = <0x16 0x0e>;
+		/*power-domains = <0x16 0x0e>;*/
+		power-domains = <&power &RK3399_PD_PERIHP>;
 		status = "okay";
 	};
 
-	usb@fe3a0000 {
+	usb_host0_ohci: usb@fe3a0000 {
 		compatible = "generic-ohci";
 		reg = <0x00 0xfe3a0000 0x00 0x20000>;
 		interrupts = <0x00 0x1c 0x04 0x00>;
@@ -411,11 +417,12 @@
 		clock-names = "hclk_host0", "hclk_host0_arb", "usbphy0_480m";
 		phys = <0x25>;
 		phy-names = "usb";
-		power-domains = <0x16 0x0e>;
+		/*power-domains = <0x16 0x0e>;*/
+		power-domains = <&power &RK3399_PD_PERIHP>;
 		status = "okay";
 	};
 
-	usb@fe3c0000 {
+	usb_host1_ehci: usb@fe3c0000 {
 		compatible = "generic-ehci";
 		reg = <0x00 0xfe3c0000 0x00 0x20000>;
 		interrupts = <0x00 0x1e 0x04 0x00>;
@@ -423,11 +430,12 @@
 		clock-names = "hclk_host1", "hclk_host1_arb", "usbphy1_480m";
 		phys = <0x26>;
 		phy-names = "usb";
-		power-domains = <0x16 0x0e>;
+		/*power-domains = <0x16 0x0e>;*/
+		power-domains = <&power &RK3399_PD_PERIHP>;
 		status = "okay";
 	};
 
-	usb@fe3e0000 {
+	usb_host1_ohci: usb@fe3e0000 {
 		compatible = "generic-ohci";
 		reg = <0x00 0xfe3e0000 0x00 0x20000>;
 		interrupts = <0x00 0x20 0x04 0x00>;
@@ -435,15 +443,17 @@
 		clock-names = "hclk_host1", "hclk_host1_arb", "usbphy1_480m";
 		phys = <0x26>;
 		phy-names = "usb";
-		power-domains = <0x16 0x0e>;
+		/*power-domains = <0x16 0x0e>;*/
+		power-domains = <&power &RK3399_PD_PERIHP>;
 		status = "okay";
 	};
 
-	usb@fe800000 {
+	usbdrd3_0: usb@fe800000 {
 		compatible = "rockchip,rk3399-dwc3";
 		clocks = <0x08 0x81 0x08 0x83 0x08 0xf6 0x08 0xf9>;
 		clock-names = "ref_clk", "suspend_clk", "bus_clk", "grf_clk";
-		power-domains = <0x16 0x18>;
+		/*power-domains = <0x16 0x18>;*/
+		power-domains = <&power &RK3399_PD_USB3>;
 		resets = <0x08 0x125>;
 		reset-names = "usb3-otg";
 		#address-cells = <0x02>;
@@ -452,7 +462,7 @@
 		status = "okay";
 		extcon = <0x27>;
 
-		dwc3@fe800000 {
+		usbdrd_dwc3_0: dwc3@fe800000 {
 			compatible = "snps,dwc3";
 			reg = <0x00 0xfe800000 0x00 0x100000>;
 			interrupts = <0x00 0x69 0x04 0x00>;
@@ -472,11 +482,12 @@
 		};
 	};
 
-	usb@fe900000 {
+	usbdrd3_1: usb@fe900000 {
 		compatible = "rockchip,rk3399-dwc3";
 		clocks = <0x08 0x82 0x08 0x84 0x08 0xf7 0x08 0xf9>;
 		clock-names = "ref_clk", "suspend_clk", "bus_clk", "grf_clk";
-		power-domains = <0x16 0x18>;
+		/*power-domains = <0x16 0x18>;*/
+		power-domains = <&power &RK3399_PD_USB3>;
 		resets = <0x08 0x126>;
 		reset-names = "usb3-otg";
 		#address-cells = <0x02>;
@@ -484,7 +495,7 @@
 		ranges;
 		status = "okay";
 
-		dwc3@fe900000 {
+		usbdrd_dwc3_1: dwc3@fe900000 {
 			compatible = "snps,dwc3";
 			reg = <0x00 0xfe900000 0x00 0x100000>;
 			interrupts = <0x00 0x6e 0x04 0x00>;
@@ -512,7 +523,8 @@
 		clock-names = "core-clk", "pclk", "spdif", "grf";
 		assigned-clocks = <0x08 0x72>;
 		assigned-clock-rates = <0x5f5e100>;
-		power-domains = <0x16 0x15>;
+		/*power-domains = <0x16 0x15>;*/
+		power-domains = <&power &RK3399_PD_HDCP>;
 		phys = <0x2c 0x2d>;
 		resets = <0x08 0x103 0x08 0x148 0x08 0x14a 0x08 0xfd>;
 		reset-names = "spdif", "dptx", "apb", "core";
@@ -1346,135 +1358,135 @@
 		phandle = <0x68>;
 	};
 
-	power-management@ff310000 {
+	pmu: power-management@ff310000 {
 		compatible = "rockchip,rk3399-pmu", "syscon", "simple-mfd";
 		reg = <0x00 0xff310000 0x00 0x1000>;
 
-		power-controller {
+		power: power-controller {
 			compatible = "rockchip,rk3399-power-controller";
 			#power-domain-cells = <0x01>;
 			#address-cells = <0x01>;
 			#size-cells = <0x00>;
 			phandle = <0x16>;
 
-			pd_iep@34 {
+			RK3399_PD_IEP: pd_iep@34 {
 				reg = <0x22>;
 				clocks = <0x08 0xe1 0x08 0x1dd>;
 				pm_qos = <0x62>;
 			};
 
-			pd_rga@33 {
+			RK3399_PD_RGA: pd_rga@33 {
 				reg = <0x21>;
 				clocks = <0x08 0xdc 0x08 0x1e5>;
 				pm_qos = <0x63 0x64>;
 			};
 
-			pd_vcodec@31 {
+			RK3399_PD_VCODEC: pd_vcodec@31 {
 				reg = <0x1f>;
 				clocks = <0x08 0xeb 0x08 0x1ea>;
 				pm_qos = <0x65>;
 			};
 
-			pd_vdu@32 {
+			RK3399_PD_VDU: pd_vdu@32 {
 				reg = <0x20>;
 				clocks = <0x08 0xed 0x08 0x1ec>;
 				pm_qos = <0x66 0x67>;
 			};
 
-			pd_gpu@35 {
+			RK3399_PD_GPU: pd_gpu@35 {
 				reg = <0x23>;
 				clocks = <0x08 0xd0>;
 				pm_qos = <0x68>;
 			};
 
-			pd_edp@25 {
+			RK3399_PD_EDP: pd_edp@25 {
 				reg = <0x19>;
 				clocks = <0x08 0x16c>;
 			};
 
-			pd_emmc@23 {
+			RK3399_PD_EMMC: pd_emmc@23 {
 				reg = <0x17>;
 				clocks = <0x08 0xf0>;
 				pm_qos = <0x69>;
 			};
 
-			pd_gmac@22 {
+			RK3399_PD_GMAC: pd_gmac@22 {
 				reg = <0x16>;
 				clocks = <0x08 0xd5 0x08 0x166>;
 				pm_qos = <0x6a>;
 			};
 
-			pd_perihp@14 {
+			RK3399_PD_PERIHP: pd_perihp@14 {
 				reg = <0x0e>;
 				#address-cells = <0x01>;
 				#size-cells = <0x00>;
 				clocks = <0x08 0xc0>;
 				pm_qos = <0x6b 0x6c 0x6d 0x6e>;
 
-				pd_sd@27 {
+				RK3399_PD_SD: pd_sd@27 {
 					reg = <0x1b>;
 					clocks = <0x08 0x1ce 0x08 0x4c>;
 					pm_qos = <0x6f>;
 				};
 			};
 
-			pd_sdioaudio@28 {
+			RK3399_PD_SDIOAUDIO: pd_sdioaudio@28 {
 				reg = <0x1c>;
 				clocks = <0x08 0x1ee>;
 				pm_qos = <0x70>;
 			};
 
-			pd_usb3@24 {
+			RK3399_PD_USB3: pd_usb3@24 {
 				reg = <0x18>;
 				clocks = <0x08 0xf4>;
 				pm_qos = <0x71 0x72>;
 			};
 
-			pd_vio@15 {
+			RK3399_PD_VIO: pd_vio@15 {
 				reg = <0x0f>;
 				#address-cells = <0x01>;
 				#size-cells = <0x00>;
 
-				pd_hdcp@21 {
+				RK3399_PD_HDCP: pd_hdcp@21 {
 					reg = <0x15>;
 					clocks = <0x08 0xde 0x08 0x1e7 0x08 0x172>;
 					pm_qos = <0x73>;
 				};
 
-				pd_isp0@19 {
+				RK3399_PD_ISP0: pd_isp0@19 {
 					reg = <0x13>;
 					clocks = <0x08 0xe5 0x08 0x1df>;
 					pm_qos = <0x74 0x75>;
 				};
 
-				pd_isp1@20 {
+				RK3399_PD_ISP1: pd_isp1@20 {
 					reg = <0x14>;
 					clocks = <0x08 0xe6 0x08 0x1e0>;
 					pm_qos = <0x76 0x77>;
 				};
 
-				pd_tcpc0@RK3399_PD_TCPC0 {
+				RK3399_PD_TCPD0: pd_tcpc0@RK3399_PD_TCPC0 {
 					reg = <0x08>;
 					clocks = <0x08 0x7e 0x08 0x7d>;
 				};
 
-				pd_tcpc1@RK3399_PD_TCPC1 {
+				RK3399_PD_TCPD1: pd_tcpc1@RK3399_PD_TCPC1 {
 					reg = <0x09>;
 					clocks = <0x08 0x80 0x08 0x7f>;
 				};
 
-				pd_vo@16 {
+				RK3399_PD_VO: pd_vo@16 {
 					reg = <0x10>;
 					#address-cells = <0x01>;
 					#size-cells = <0x00>;
 
-					pd_vopb@17 {
+					RK3399_PD_VOPB: pd_vopb@17 {
 						reg = <0x11>;
 						clocks = <0x08 0xd9 0x08 0x1d9>;
 						pm_qos = <0x78 0x79>;
 					};
 
-					pd_vopl@18 {
+					RK3399_PD_VOPL: pd_vopl@18 {
 						reg = <0x12>;
 						clocks = <0x08 0xdb 0x08 0x1db>;
 						pm_qos = <0x7a>;
@@ -1746,7 +1758,7 @@
 		phandle = <0xab>;
 	};
 
-	vpu_service@ff650000 {
+	vpu: vpu_service@ff650000 {
 		compatible = "rockchip,vpu_service";
 		rockchip,grf = <0x15>;
 		iommus = <0x90>;
@@ -1758,25 +1770,27 @@
 		clock-names = "aclk_vcodec", "hclk_vcodec";
 		resets = <0x08 0x53 0x08 0x51>;
 		reset-names = "video_h", "video_a";
-		power-domains = <0x16 0x1f>;
+		/*power-domains = <0x16 0x1f>;*/
+		power-domains = <&power &RK3399_PD_VCODEC>;
 		dev_mode = <0x00>;
 		allocator = <0x01>;
 		status = "okay";
 	};
 
-	iommu@ff650800 {
+	vpu_mmu: iommu@ff650800 {
 		compatible = "rockchip,iommu";
 		reg = <0x00 0xff650800 0x00 0x40>;
 		interrupts = <0x00 0x73 0x04 0x00>;
 		interrupt-names = "vpu_mmu";
 		clocks = <0x08 0xeb 0x08 0x1ea>;
 		clock-names = "aclk", "hclk";
-		power-domains = <0x16 0x1f>;
+		/*power-domains = <0x16 0x1f>;*/
+		power-domains = <&power &RK3399_PD_VCODEC>;
 		#iommu-cells = <0x00>;
 		phandle = <0x90>;
 	};
 
-	rkvdec@ff660000 {
+	vdec: rkvdec@ff660000 {
 		compatible = "rockchip,rkvdec";
 		rockchip,grf = <0x15>;
 		iommus = <0x91>;
@@ -1788,20 +1802,22 @@
 		clock-names = "aclk_vcodec", "hclk_vcodec", "clk_cabac", "clk_core";
 		resets = <0x08 0x5b 0x08 0x59 0x08 0x5c 0x08 0x5d 0x08 0x58 0x08 0x5a>;
 		reset-names = "video_h", "video_a", "video_core", "video_cabac", "niu_a", "niu_h";
-		power-domains = <0x16 0x20>;
+		/*power-domains = <0x16 0x20>;*/
+		power-domains = <&power &RK3399_PD_VDU>;
 		dev_mode = <0x02>;
 		allocator = <0x01>;
 		status = "okay";
 	};
 
-	iommu@ff660480 {
+	vdec_mmu: iommu@ff660480 {
 		compatible = "rockchip,iommu";
 		reg = <0x00 0xff660480 0x00 0x40 0x00 0xff6604c0 0x00 0x40>;
 		interrupts = <0x00 0x75 0x04 0x00>;
 		interrupt-names = "vdec_mmu";
 		clocks = <0x08 0xed 0x08 0x1ec>;
 		clock-names = "aclk", "hclk";
-		power-domains = <0x16 0x20>;
+		/*power-domains = <0x16 0x20>;*/
+		power-domains = <&power &RK3399_PD_VDU>;
 		#iommu-cells = <0x00>;
 		phandle = <0x91>;
 	};
@@ -1814,7 +1830,8 @@
 		interrupts = <0x00 0x2a 0x04 0x00>;
 		clocks = <0x08 0xe1 0x08 0x1dd>;
 		clock-names = "aclk_iep", "hclk_iep";
-		power-domains = <0x16 0x22>;
+		/*power-domains = <0x16 0x22>;*/
+		power-domains = <&power &RK3399_PD_IEP>;
 		allocator = <0x01>;
 		version = <0x02>;
 		status = "okay";
@@ -1830,7 +1847,7 @@
 		phandle = <0x92>;
 	};
 
-	rga@ff680000 {
+	rga: rga@ff680000 {
 		compatible = "rockchip,rga2";
 		reg = <0x00 0xff680000 0x00 0x1000>;
 		interrupts = <0x00 0x37 0x04 0x00>;
@@ -1838,7 +1855,8 @@
 		clock-names = "aclk_rga", "hclk_rga", "clk_rga";
 		resets = <0x08 0x6a 0x08 0x67 0x08 0x69>;
 		reset-names = "core", "axi", "ahb";
-		power-domains = <0x16 0x21>;
+		/*power-domains = <0x16 0x21>;*/
+		power-domains = <&power &RK3399_PD_RGA>;
 		status = "okay";
 		dev_mode = <0x01>;
 		dma-coherent;
@@ -1990,11 +2008,12 @@
 			};
 		};
 
-		mipi-dphy-rx0 {
+		mipi-dphy-rx0: mipi-dphy-rx0 {
 			compatible = "rockchip,rk3399-mipi-dphy";
 			clocks = <0x08 0x77 0x08 0xa5 0x08 0x16f>;
 			clock-names = "dphy-ref", "dphy-cfg", "grf";
-			power-domains = <0x16 0x0f>;
+			/*power-domains = <0x16 0x0f>;*/
+			power-domains = <&power &RK3399_PD_VIO>;
 			status = "disabled";
 		};
 
@@ -2008,7 +2027,7 @@
 		};
 	};
 
-	phy@ff7c0000 {
+	tcphy0: phy@ff7c0000 {
 		compatible = "rockchip,rk3399-typec-phy";
 		reg = <0x00 0xff7c0000 0x00 0x40000>;
 		rockchip,grf = <0x15>;
@@ -2017,7 +2036,8 @@
 		clock-names = "tcpdcore", "tcpdphy-ref";
 		assigned-clocks = <0x08 0x7e>;
 		assigned-clock-rates = <0x2faf080>;
-		power-domains = <0x16 0x08>;
+		/*power-domains = <0x16 0x08>;*/
+		power-domains = <&power &RK3399_PD_TCPD0>;
 		resets = <0x08 0x95 0x08 0x94 0x08 0x14c>;
 		reset-names = "uphy", "uphy-pipe", "uphy-tcphy";
 		rockchip,typec-conn-dir = <0xe580 0x00 0x10>;
@@ -2041,7 +2061,7 @@
 		};
 	};
 
-	phy@ff800000 {
+	tcphy1: phy@ff800000 {
 		compatible = "rockchip,rk3399-typec-phy";
 		reg = <0x00 0xff800000 0x00 0x40000>;
 		rockchip,grf = <0x15>;
@@ -2050,7 +2070,8 @@
 		clock-names = "tcpdcore", "tcpdphy-ref";
 		assigned-clocks = <0x08 0x80>;
 		assigned-clock-rates = <0x2faf080>;
-		power-domains = <0x16 0x09>;
+		/*power-domains = <0x16 0x09>;*/
+		power-domains = <&power &RK3399_PD_TCPD1>;
 		resets = <0x08 0x9d 0x08 0x9c 0x08 0x14d>;
 		reset-names = "uphy", "uphy-pipe", "uphy-tcphy";
 		rockchip,typec-conn-dir = <0xe58c 0x00 0x10>;
@@ -2080,7 +2101,7 @@
 		interrupts = <0x00 0x78 0x04 0x00>;
 	};
 
-	rktimer@ff850000 {
+	rktimer: rktimer@ff850000 {
 		compatible = "rockchip,rk3399-timer";
 		reg = <0x00 0xff850000 0x00 0x1000>;
 		interrupts = <0x00 0x51 0x04 0x00>;
@@ -2088,7 +2109,7 @@
 		clock-names = "pclk", "timer";
 	};
 
-	spdif@ff870000 {
+	spdif: spdif@ff870000 {
 		compatible = "rockchip,rk3399-spdif";
 		reg = <0x00 0xff870000 0x00 0x1000>;
 		interrupts = <0x00 0x42 0x04 0x00>;
@@ -2098,13 +2119,14 @@
 		clocks = <0x08 0x55 0x08 0x1d7>;
 		pinctrl-names = "default";
 		pinctrl-0 = <0x98>;
-		power-domains = <0x16 0x1c>;
+		/*power-domains = <0x16 0x1c>;*/
+		power-domains = <&power &RK3399_PD_SDIOAUDIO>;
 		status = "disabled";
 		assigned-clocks = <0x08 0xb1>;
 		assigned-clock-parents = <0x08 0x05>;
 	};
 
-	i2s@ff880000 {
+	i2s0: i2s@ff880000 {
 		compatible = "rockchip,rk3399-i2s", "rockchip,rk3066-i2s";
 		reg = <0x00 0xff880000 0x00 0x1000>;
 		rockchip,grf = <0x15>;
@@ -2115,7 +2137,8 @@
 		clocks = <0x08 0x56 0x08 0x1d4>;
 		pinctrl-names = "default";
 		pinctrl-0 = <0x99>;
-		power-domains = <0x16 0x1c>;
+		/*power-domains = <0x16 0x1c>;*/
+		power-domains = <&power &RK3399_PD_SDIOAUDIO>;
 		status = "okay";
 		assigned-clocks = <0x08 0xae>;
 		assigned-clock-parents = <0x08 0x05>;
@@ -2126,7 +2149,7 @@
 		phandle = <0xd7>;
 	};
 
-	i2s@ff890000 {
+	i2s1: i2s@ff890000 {
 		compatible = "rockchip,rk3399-i2s", "rockchip,rk3066-i2s";
 		reg = <0x00 0xff890000 0x00 0x1000>;
 		interrupts = <0x00 0x28 0x04 0x00>;
@@ -2136,7 +2159,8 @@
 		clocks = <0x08 0x57 0x08 0x1d5>;
 		pinctrl-names = "default";
 		pinctrl-0 = <0x9a>;
-		power-domains = <0x16 0x1c>;
+		/*power-domains = <0x16 0x1c>;*/
+		power-domains = <&power &RK3399_PD_SDIOAUDIO>;
 		status = "okay";
 		assigned-clocks = <0x08 0xaf>;
 		assigned-clock-parents = <0x08 0x05>;
@@ -2144,7 +2168,7 @@
 		phandle = <0xd9>;
 	};
 
-	i2s@ff8a0000 {
+	i2s2: i2s@ff8a0000 {
 		compatible = "rockchip,rk3399-i2s", "rockchip,rk3066-i2s";
 		reg = <0x00 0xff8a0000 0x00 0x1000>;
 		interrupts = <0x00 0x29 0x04 0x00>;
@@ -2152,7 +2176,8 @@
 		dma-names = "tx", "rx";
 		clock-names = "i2s_clk", "i2s_hclk";
 		clocks = <0x08 0x58 0x08 0x1d6>;
-		power-domains = <0x16 0x1c>;
+		/*power-domains = <0x16 0x1c>;*/
+		power-domains = <&power &RK3399_PD_SDIOAUDIO>;
 		status = "okay";
 		assigned-clocks = <0x08 0xb0>;
 		assigned-clock-parents = <0x08 0x05>;
@@ -2161,7 +2186,7 @@
 		phandle = <0xcb>;
 	};
 
-	gpu@ff9a0000 {
+	gpu: gpu@ff9a0000 {
 		compatible = "arm,malit860", "arm,malit86x", "arm,malit8xx", "arm,mali-midgard";
 		reg = <0x00 0xff9a0000 0x00 0x10000>;
 		interrupts = <0x00 0x13 0x04 0x00 0x00 0x14 0x04 0x00 0x00 0x15 0x04 0x00>;
@@ -2169,7 +2194,8 @@
 		clocks = <0x08 0xd0>;
 		clock-names = "clk_mali";
 		#cooling-cells = <0x02>;
-		power-domains = <0x16 0x23>;
+		/*power-domains = <0x16 0x23>;*/
+		power-domains = <&power &RK3399_PD_GPU>;
 		power-off-delay-ms = <0xc8>;
 		status = "okay";
 		operating-points-v2 = <0x9b>;
@@ -2187,7 +2213,7 @@
 		};
 	};
 
-	vop@ff8f0000 {
+	vopl: vop@ff8f0000 {
 		compatible = "rockchip,rk3399-vop-lit";
 		reg = <0x00 0xff8f0000 0x00 0x600 0x00 0xff8f1c00 0x00 0x200 0x00 0xff8f2000 0x00 0x400>;
 		reg-names = "regs", "cabc_lut", "gamma_lut";
@@ -2196,7 +2222,8 @@
 		clock-names = "aclk_vop", "dclk_vop", "hclk_vop", "dclk_source";
 		resets = <0x08 0x113 0x08 0x117 0x08 0x119>;
 		reset-names = "axi", "ahb", "dclk";
-		power-domains = <0x16 0x12>;
+		/*power-domains = <0x16 0x12>;*/
+		power-domains = <&power &RK3399_PD_VOPL>;
 		iommus = <0x9d>;
 		status = "okay";
 		assigned-clocks = <0x08 0xb7>;
@@ -2250,20 +2277,21 @@
 		status = "disabled";
 	};
 
-	iommu@ff8f3f00 {
+	vopl_mmu: iommu@ff8f3f00 {
 		compatible = "rockchip,iommu";
 		reg = <0x00 0xff8f3f00 0x00 0x100>;
 		interrupts = <0x00 0x77 0x04 0x00>;
 		interrupt-names = "vopl_mmu";
 		clocks = <0x08 0xdb 0x08 0x1db>;
 		clock-names = "aclk", "hclk";
-		power-domains = <0x16 0x12>;
+		/*power-domains = <0x16 0x12>;*/
+		power-domains = <&power &RK3399_PD_VOPL>;
 		#iommu-cells = <0x00>;
 		status = "okay";
 		phandle = <0x9d>;
 	};
 
-	vop@ff900000 {
+	vopb: vop@ff900000 {
 		compatible = "rockchip,rk3399-vop-big";
 		reg = <0x00 0xff900000 0x00 0x600 0x00 0xff901c00 0x00 0x200 0x00 0xff902000 0x00 0x1000>;
 		reg-names = "regs", "cabc_lut", "gamma_lut";
@@ -2272,42 +2300,43 @@
 		clock-names = "aclk_vop", "dclk_vop", "hclk_vop", "dclk_source";
 		resets = <0x08 0x112 0x08 0x116 0x08 0x118>;
 		reset-names = "axi", "ahb", "dclk";
-		power-domains = <0x16 0x11>;
+		/*power-domains = <0x16 0x11>;*/
+		power-domains = <&power &RK3399_PD_VOPB>;
 		iommus = <0xa4>;
 		status = "okay";
 		assigned-clocks = <0x08 0xb6>;
 		assigned-clock-parents = <0x08 0x04>;
 
-		port {
+		vopb_out: port {
 			#address-cells = <0x01>;
 			#size-cells = <0x00>;
 			phandle = <0xbc>;
 
-			endpoint@0 {
+			vopb_out_edp: endpoint@0 {
 				reg = <0x00>;
 				remote-endpoint = <0xa5>;
 				phandle = <0xb9>;
 			};
 
-			endpoint@1 {
+			vopb_out_mipi: endpoint@1 {
 				reg = <0x01>;
 				remote-endpoint = <0xa6>;
 				phandle = <0xb1>;
 			};
 
-			endpoint@2 {
+			vopb_out_hdmi: endpoint@2 {
 				reg = <0x02>;
 				remote-endpoint = <0xa7>;
 				phandle = <0xaf>;
 			};
 
-			endpoint@3 {
+			vopb_out_mipi1: endpoint@3 {
 				reg = <0x03>;
 				remote-endpoint = <0xa8>;
 				phandle = <0x2e>;
 			};
 
-			endpoint@4 {
+			vopb_out_dp: endpoint@4 {
 				reg = <0x04>;
 				remote-endpoint = <0xa9>;
 				phandle = <0xb6>;
@@ -2326,14 +2355,15 @@
 		status = "disabled";
 	};
 
-	iommu@ff903f00 {
+	vopb_mmu: iommu@ff903f00 {
 		compatible = "rockchip,iommu";
 		reg = <0x00 0xff903f00 0x00 0x100>;
 		interrupts = <0x00 0x76 0x04 0x00>;
 		interrupt-names = "vopb_mmu";
 		clocks = <0x08 0xd9 0x08 0x1d9>;
 		clock-names = "aclk", "hclk";
-		power-domains = <0x16 0x11>;
+		/*power-domains = <0x16 0x11>;*/
+		power-domains = <&power &RK3399_PD_VOPB>;
 		#iommu-cells = <0x00>;
 		status = "okay";
 		phandle = <0xa4>;
@@ -2346,12 +2376,13 @@
 		clocks = <0x08 0x6e 0x08 0xe5 0x08 0x1df 0x08 0xe9 0x08 0x1e3>;
 		clock-names = "clk_isp", "aclk_isp", "hclk_isp", "aclk_isp_wrap", "hclk_isp_wrap";
 		devfreq = <0xab>;
-		power-domains = <0x16 0x13>;
+		/*power-domains = <0x16 0x13>;*/
+		power-domains = <&power &RK3399_PD_ISP0>;
 		iommus = <0xac>;
 		status = "disabled";
 	};
 
-	iommu@ff914000 {
+	isp0_mmu: iommu@ff914000 {
 		compatible = "rockchip,iommu";
 		reg = <0x00 0xff914000 0x00 0x100 0x00 0xff915000 0x00 0x100>;
 		interrupts = <0x00 0x2b 0x04 0x00>;
@@ -2359,7 +2390,8 @@
 		#iommu-cells = <0x00>;
 		clocks = <0x08 0xe7 0x08 0x1e1>;
 		clock-names = "aclk", "hclk";
-		power-domains = <0x16 0x13>;
+		/*power-domains = <0x16 0x13>;*/
+		power-domains = <&power &RK3399_PD_ISP0>;
 		rk_iommu,disable_reset_quirk;
 		status = "okay";
 		phandle = <0xac>;
@@ -2372,12 +2404,13 @@
 		clocks = <0x08 0x6f 0x08 0xe6 0x08 0x1e0 0x08 0xea 0x08 0x1e4>;
 		clock-names = "clk_isp", "aclk_isp", "hclk_isp", "aclk_isp_wrap", "hclk_isp_wrap";
 		devfreq = <0xab>;
-		power-domains = <0x16 0x14>;
+		/*power-domains = <0x16 0x14>;*/
+		power-domains = <&power &RK3399_PD_ISP1>;
 		iommus = <0xad>;
 		status = "disabled";
 	};
 
-	iommu@ff924000 {
+	isp1_mmu: iommu@ff924000 {
 		compatible = "rockchip,iommu";
 		reg = <0x00 0xff924000 0x00 0x100 0x00 0xff925000 0x00 0x100>;
 		interrupts = <0x00 0x2c 0x04 0x00>;
@@ -2385,20 +2418,22 @@
 		#iommu-cells = <0x00>;
 		clocks = <0x08 0xe8 0x08 0x1e2>;
 		clock-names = "aclk", "hclk";
-		power-domains = <0x16 0x14>;
+		/*power-domains = <0x16 0x14>;*/
+		power-domains = <&power &RK3399_PD_ISP1>;
 		rk_iommu,disable_reset_quirk;
 		status = "okay";
 		phandle = <0xad>;
 	};
 
-	hdmi@ff940000 {
+	hdmi: hdmi@ff940000 {
 		compatible = "rockchip,rk3399-dw-hdmi";
 		reg = <0x00 0xff940000 0x00 0x20000>;
 		reg-io-width = <0x04>;
 		rockchip,grf = <0x15>;
 		pinctrl-names = "default";
 		pinctrl-0 = <0xae>;
-		power-domains = <0x16 0x15>;
+		/*power-domains = <0x16 0x15>;*/
+		power-domains = <&power &RK3399_PD_HDCP>;
 		interrupts = <0x00 0x17 0x04 0x00>;
 		clocks = <0x08 0x174 0x08 0x71 0x08 0x07 0x08 0x16f 0x08 0x70>;
 		clock-names = "iahb", "isfr", "vpll", "grf", "cec";
@@ -2412,20 +2447,20 @@
 
 		ports {
 
-			port {
+			hdmi_in: port {
 				#address-cells = <0x01>;
 				#size-cells = <0x00>;
 
-				endpoint@0 {
+				hdmi_in_vopb: endpoint@0 {
 					reg = <0x00>;
-					remote-endpoint = <0xaf>;
+					remote-endpoint = <&vopb_out_hdmi>;
 					status = "disabled";
 					phandle = <0xa7>;
 				};
 
-				endpoint@1 {
+				hdmi_in_vopl: endpoint@1 {
 					reg = <0x01>;
-					remote-endpoint = <0xb0>;
+					remote-endpoint = <&vopl_out_hdmi>;
 					status = "okay";
 					phandle = <0xa0>;
 				};
@@ -2433,7 +2468,7 @@
 		};
 	};
 
-	dsi@ff960000 {
+	mipi_dsi: dsi@ff960000 {
 		compatible = "rockchip,rk3399-mipi-dsi";
 		reg = <0x00 0xff960000 0x00 0x8000>;
 		interrupts = <0x00 0x2d 0x04 0x00>;
@@ -2441,7 +2476,8 @@
 		clock-names = "ref", "pclk", "phy_cfg";
 		resets = <0x08 0xfb>;
 		reset-names = "apb";
-		power-domains = <0x16 0x0f>;
+		/*power-domains = <0x16 0x0f>;*/
+		power-domains = <&power &RK3399_PD_VIO>;
 		rockchip,grf = <0x15>;
 		#address-cells = <0x01>;
 		#size-cells = <0x00>;
@@ -2515,7 +2551,7 @@
 		};
 	};
 
-	dsi@ff968000 {
+	mipi_dsi1: dsi@ff968000 {
 		compatible = "rockchip,rk3399-mipi-dsi";
 		reg = <0x00 0xff968000 0x00 0x8000>;
 		interrupts = <0x00 0x2e 0x04 0x00>;
@@ -2523,7 +2559,8 @@
 		clock-names = "ref", "pclk", "phy_cfg";
 		resets = <0x08 0xfc>;
 		reset-names = "apb";
-		power-domains = <0x16 0x0f>;
+		/*power-domains = <0x16 0x0f>;*/
+		power-domains = <&power &RK3399_PD_VIO>;
 		rockchip,grf = <0x15>;
 		#address-cells = <0x01>;
 		#size-cells = <0x00>;
@@ -2550,13 +2587,14 @@
 		};
 	};
 
-	edp@ff970000 {
+	edp: edp@ff970000 {
 		compatible = "rockchip,rk3399-edp";
 		reg = <0x00 0xff970000 0x00 0x8000>;
 		interrupts = <0x00 0x0a 0x04 0x00>;
 		clocks = <0x08 0x16a 0x08 0x16c>;
 		clock-names = "dp", "pclk";
-		power-domains = <0x16 0x19>;
+		/*power-domains = <0x16 0x19>;*/
+		power-domains = <&power &RK3399_PD_EDP>;
 		resets = <0x08 0x11d>;
 		reset-names = "dp";
 		rockchip,grf = <0x15>;
@@ -3779,7 +3817,8 @@
 		rockchip,cru = <0x08>;
 		rockchip,gpios = <0x34 0x03 0x00>;
 		rockchip,isp,iommu-enable = <0x01>;
-		power-domains = <0x16 0x13>;
+		/*power-domains = <0x16 0x13>;*/
+		power-domains = <&power &RK3399_PD_ISP0>;
 		iommus = <0xac>;
 		status = "okay";
 	};
@@ -3802,7 +3841,8 @@
 		rockchip,cru = <0x08>;
 		rockchip,gpios = <0x34 0x03 0x00>;
 		rockchip,isp,iommu-enable = <0x01>;
-		power-domains = <0x16 0x14>;
+		/*power-domains = <0x16 0x14>;*/
+		power-domains = <&power &RK3399_PD_ISP1>;
 		iommus = <0xad>;
 		status = "okay";
 	};
