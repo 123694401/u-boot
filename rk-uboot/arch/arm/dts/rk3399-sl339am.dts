@@ -2314,31 +2314,36 @@
 
 			vopb_out_edp: endpoint@0 {
 				reg = <0x00>;
-				remote-endpoint = <0xa5>;
+				/* remote-endpoint = <0xa5>; */
+				remote-endpoint = <&edp_in_vopb>;
 				phandle = <0xb9>;
 			};
 
 			vopb_out_mipi: endpoint@1 {
 				reg = <0x01>;
-				remote-endpoint = <0xa6>;
+				/* remote-endpoint = <0xa6>; */
+				remote-endpoint = <&mipi_in_vopb>;
 				phandle = <0xb1>;
 			};
 
 			vopb_out_hdmi: endpoint@2 {
 				reg = <0x02>;
-				remote-endpoint = <0xa7>;
+				/* remote-endpoint = <0xa7>; */
+				remote-endpoint = <&hdmi_in_vopb>;
 				phandle = <0xaf>;
 			};
 
-			vopb_out_mipi1: endpoint@3 {
+			vopb_out_dp: endpoint@3 {
 				reg = <0x03>;
-				remote-endpoint = <0xa8>;
+				/* remote-endpoint = <0xa8>; */
+				remote-endpoint = <&dp_in_vopb>;
 				phandle = <0x2e>;
 			};
 
-			vopb_out_dp: endpoint@4 {
+			vopb_out_mipi1: endpoint@4 {
 				reg = <0x04>;
-				remote-endpoint = <0xa9>;
+				/* remote-endpoint = <0xa9>; */
+				remote-endpoint = <&mipi1_in_vopb>;
 				phandle = <0xb6>;
 			};
 		};
@@ -2453,6 +2458,7 @@
 
 				hdmi_in_vopb: endpoint@0 {
 					reg = <0x00>;
+					/*remote-endpoint = <0xaf>;*/
 					remote-endpoint = <&vopb_out_hdmi>;
 					status = "disabled";
 					phandle = <0xa7>;
@@ -2460,6 +2466,7 @@
 
 				hdmi_in_vopl: endpoint@1 {
 					reg = <0x01>;
+					/*remote-endpoint = <0xb0>;*/
 					remote-endpoint = <&vopl_out_hdmi>;
 					status = "okay";
 					phandle = <0xa0>;
